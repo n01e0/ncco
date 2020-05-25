@@ -1,0 +1,13 @@
+[package]
+name = "ncco"
+version = "0.0.1"
+authors = ["n01e0 <noleo@vanillabeans.mobi>"]
+edition = "2018"
+description = "Use index to find commit id"
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+git2 = "0.13.6"
+clap = "2.33.1"
+colored = "1.9.3"
