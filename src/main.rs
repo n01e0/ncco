@@ -79,6 +79,9 @@ fn main() {
                 let target_hash = revec[target_index].id();
 
                 println!("target commit hash is {}", target_hash);
+            } else {
+                eprintln!("{} Commit ID {} not found.", "error".red(), hash);
+                std::process::exit(1)
             }
         }
     }
