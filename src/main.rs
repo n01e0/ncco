@@ -75,10 +75,24 @@ fn main() {
                     }
                 );
                 let revec = revwalk.collect::<Vec<_>>();
-                let target_index = (base_index as i64 + nth) as usize;
+                let target_index = (base_index as i64 - nth) as usize;
                 let target_hash = revec[target_index].id();
 
+                let _branch = repo.branch(&target_hash.to_string(), &repo.find_commit(target_hash).unwrap(), false);
+
                 println!("target commit hash is {}", target_hash);
+                let obj = repo.revparse_single(&format!("refs/heads/{}", &target_hash)).unwrap();
+                match repo.checkout_tree(&obj, None) {
+                    Ok(_) => {
+                        println!("chekout to {} done", target_hash);
+                        repo.set_head_detached(target_hash).expect("set head err");
+                        println!("now HEAD is {} commits from {}", nth, hash);
+                    },
+
+                    Err(e) => {
+                        eprintln!("{} {}", "error:".red(), e.message());
+                    }
+                }
             } else {
                 eprintln!("{} Commit ID {} not found.", "error".red(), hash);
                 std::process::exit(1)
@@ -86,4 +100,3 @@ fn main() {
         }
     }
 }
-

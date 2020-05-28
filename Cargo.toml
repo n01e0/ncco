@@ -1,6 +1,6 @@
 [package]
 name = "ncco"
-version = "0.0.1"
+version = "1.0.0"
 authors = ["n01e0 <noleo@vanillabeans.mobi>"]
 edition = "2018"
 description = "Use index to find commit id"
